@@ -29,7 +29,7 @@ class PhpNutClient
      * 
      * @var resource
      */
-    private $socketConnection;
+    protected $socketConnection;
     
     /**
      * @var string $host The hostname or IP.
@@ -44,11 +44,19 @@ class PhpNutClient
         public string $password = ""
     ) {}
 
-    //TODO: test fclose    
     public function __destruct()
     {
-        $this->disconnect();
-        // fclose($this->socketConnection);
+        $exceptionNotRaised = true;
+        try {
+            $this->getNutServerVersion();
+        } catch (\Throwable) {
+            $exceptionNotRaised = false;
+        }
+        if($exceptionNotRaised) $this->disconnect();
+        if($this->socketConnection) {
+            $f = fclose($this->socketConnection);
+            if(!$f) throw new IOException("Unable to close connection");
+        }
     }
     
     /**
@@ -58,7 +66,7 @@ class PhpNutClient
      * @return true If write is successful.
      * @throws IOException If unable to write to resource.
      */
-     function write(string $data): bool
+    private function write(string $data): bool
     {
         $f = fwrite($this->socketConnection, $data."\n"); //Note: "\n" is required (not '\n')
         if(!$f) throw new IOException('Unable to write to resource');
@@ -548,7 +556,7 @@ class PhpNutClient
         return $this->convertMultipleLinesOutputArrIntoNamedKeysArr($linesArr, ['variableMinValue', 'variableMaxValue']);
     }
 
-    //not sure why in nut docs the arg is device_name and note upsname    
+    //not sure why in nut docs the arg is device_name and not upsname    
     /**
      * Gets the clients connected to the UPS.
      *
