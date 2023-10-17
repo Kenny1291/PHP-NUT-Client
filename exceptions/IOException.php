@@ -1,6 +1,8 @@
 <?php
 
-class IOException extends Exception
+namespace PhpNutClient\Exceptions;
+
+class IOException extends \Exception
 {
     
 }

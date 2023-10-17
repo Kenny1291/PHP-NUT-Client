@@ -1,6 +1,8 @@
 <?php
 
-class NutException extends Exception
+namespace PhpNutClient\Exceptions;
+
+class NutException extends \Exception
 {
     private array $descriptions = [
         'ACCESS-DENIED' => 'The host and/or authentication details (username, password) are not sufficient to execute the requested command.',
