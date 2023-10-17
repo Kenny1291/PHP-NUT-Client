@@ -1,7 +1,11 @@
 <?php
 
-require_once 'exceptions/IOException.php';
-require_once 'exceptions/NutException.php';
+namespace PhpNutClient;
+
+use PhpNutClient\Exceptions\IOException;
+use PhpNutClient\Exceptions\NutException;
+
+require_once 'vendor/autoload.php';
 
 //TODO: Make backwards compatible with old protocol (That used REQ command)
 //TODO: Should write a parser to process output (parseconf)
@@ -75,16 +79,19 @@ class PhpNutClient
     
     /**
      * Reads characters from $socketConnection until a newline character.
-     *
+     * Note: It allows fgetc() to fail twice.
+     * 
      * @return string $chars The characters read discarding the newline character.
      * @throws IOException If unable to read from resource.
      */
     private function readCharsUntilNewLine(): string
     {
         $chars = "";
+        $failures = 0;
         do {
             $char = fgetc($this->socketConnection); 
-            if(!$char) throw new IOException('Unable to read from resource');
+            if(!$char) $failures++;
+            if($failures > 2) throw new IOException('Unable to read from resource');
             $chars .= $char;
         } while (addcslashes($char, "\0..\37") !== '\n');
         $chars = substr($chars, 0, -1);
