@@ -1,5 +1,5 @@
 # PHP-NUT-Client
->⚠️ This project is not completed nor is actively mantained!
+>⚠️ This project is not completed nor is actively maintained!
 
 PhpNutClient abstracts the connection the the NUT server. It's a wrapper around the [NUT network protocol](https://networkupstools.org/docs/developer-guide.chunked/ar01s09.html). It can be integrated into other PHP programs to access NUT's upsd data server.
 
