@@ -7,6 +7,3 @@ NutExceptions are raised when a NUT network protocol error occurs. They aim to p
 
 ## Testing
 A Dockerfile to build a testing environment is provided, which includes a dummy UPS.
-
-## License
-This is open-sourced software licensed under the [GNU GPL license](https://www.gnu.org/licenses).
