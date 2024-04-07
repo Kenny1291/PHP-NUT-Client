@@ -33,7 +33,7 @@ class PhpNutClient
      * 
      * @var resource
      */
-    protected $socketConnection;
+    private $socketConnection;
     
     /**
      * @var string $host The hostname or IP.
@@ -42,10 +42,10 @@ class PhpNutClient
      * @var string $password The password to use to connect to NUT server. Defaults to an empty string.
      */
     public function __construct(
-        public string $host,
-        public int $port = 3493,
-        public string $username = "",
-        public string $password = ""
+        private string $host,
+        private int $port = 3493,
+        private string $username = "",
+        private string $password = ""
     ) {}
 
     public function __destruct()
@@ -106,7 +106,7 @@ class PhpNutClient
      * @throws IOException If unable to read from resource.
      * @throws NutException If a NUT protocol error occurs.
      */
-     function readLinesUntil(string $delimiter): array
+    private function readLinesUntil(string $delimiter): array
     {
         $lines = [];
         do {
@@ -216,7 +216,7 @@ class PhpNutClient
      * @throws NutException If a NUT protocol error occurs.
      * @throws IOException If error occurs in readLinesUntil().
      */
-     function handleMultipleLinesOutput(string $keyWord, bool $includeLastTwoStrings = false): array
+    private function handleMultipleLinesOutput(string $keyWord, bool $includeLastTwoStrings = false): array
     {
         $lines = $this->readLinesUntil($keyWord);
         $linesArr = [];
