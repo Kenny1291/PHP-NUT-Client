@@ -42,10 +42,10 @@ class PhpNutClient
      * @var string $password The password to use to connect to NUT server. Defaults to an empty string.
      */
     public function __construct(
-        private string $host,
-        private int $port = 3493,
-        private string $username = "",
-        private string $password = ""
+        private readonly string $host,
+        private readonly int $port = 3493,
+        private readonly string $username = "",
+        private readonly string $password = ""
     ) {}
 
     public function __destruct()
