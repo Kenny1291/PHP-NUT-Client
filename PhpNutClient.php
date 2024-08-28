@@ -22,9 +22,7 @@ require_once 'vendor/autoload.php';
  * 
  * @author Raiquen Guidotti <raiquen@live.com>
  * @copyright 2023 Raiquen Guidotti 
- * @license GNU GPL
- * You should have received a copy of the GNU GPL License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ * @license MIT
  */
 class PhpNutClient
 {
