@@ -20,7 +20,7 @@ require_once 'vendor/autoload.php';
  * NUT network protocol docs: <https://networkupstools.org/docs/developer-guide.chunked/ar01s09.html>
  * Should support versions <=2.8.0
  * 
- * @author Raiquen Guidotti <raiquen@live.com>
+ * @author Raiquen Guidotti
  * @copyright 2023 Raiquen Guidotti 
  * @license MIT
  */
